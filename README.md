@@ -3,7 +3,6 @@
 [![Quality Gate](http://192.168.6.182:9000/api/badges/gate?key=${modulo}-rest-treinamento-pulse_master)](http://192.168.6.182:9000/dashboard/index/${modulo}-rest-treinamento-pulse_master)
 [![Quality Gate](http://192.168.6.182:9000/api/badges/measure?key=${modulo}-rest-treinamento-pulse_master&metric=coverage)](http://192.168.6.182:9000/dashboard/index/${modulo}-rest-treinamento-pulse_master)
 
-treinamento-pulse
-==============
+## :books: Projeto Treinamento Spring - Pulse
 
-Insira sua documentação principal aqui.
+Projeto desenvolvido com base no desafio técnico proposto durante treinamento sobre Spring na Pulse
