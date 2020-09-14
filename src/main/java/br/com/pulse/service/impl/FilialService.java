@@ -64,7 +64,7 @@ public class FilialService implements IFilialService {
     public Optional<Filial> buscarFilial(Long idFilial) {
         Optional<Filial> filialBuscado = filialMapper.buscarFilial(idFilial);
         if(!filialBuscado.isPresent()){
-            log.error("Produto buscado não existe");
+            log.error("Filial buscada não existe");
             throw new ServiceException("Filial com id " + idFilial + " inexistente");
         }
         return filialBuscado;

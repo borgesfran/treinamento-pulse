@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.com.pulse.mapper.EstoqueMapper">
+
+    <insert id="inserirEstoque" parameterType="br.com.pulse.model.Estoque" useGeneratedKeys="true" keyColumn="id" keyProperty="estoque.idEstoque" >
+        INSERT INTO estoque (id_filial, id_produto, qtd_estoque) VALUES (#{estoque.filialEstoque.idFilial}, #{estoque.produtoEstoque.idProduto}, #{estoque.qtdEstoque});
+    </insert>
+
+    <update id="atualizarEstoque" parameterType="br.com.pulse.model.Estoque">
+        UPDATE estoque SET id_filial = #{estoque.filialEstoque.idFilial}, id_produto = #{estoque.produtoEstoque.idProduto}, qtd_estoque = #{estoque.qtdEstoque} WHERE id=#{estoque.idEstoque}
+    </update>
+
+    <delete id="deletarEstoque" parameterType="br.com.pulse.model.Estoque">
+        DELETE FROM estoque WHERE id=#{idEstoque}
+    </delete>
+
+    <select id="buscarEstoquePorProdutoEFilial" resultType="br.com.pulse.model.Estoque">
+        SELECT ETQ.ID AS idEstoque,
+               FIL.DESCRICAO AS filialEstoque,
+               PRD.DESCRICAO AS produtoEstoque,
+               QTD_ESTOQUE AS qtdEstoque
+        FROM ESTOQUE AS ETQ
+                 INNER JOIN FILIAL AS FIL ON ETQ.ID_FILIAL = FIL.ID
+                 INNER JOIN PRODUTO AS PRD ON ETQ.ID_PRODUTO = PRD.ID
+        WHERE ETQ.ID_PRODUTO = #{idProduto} AND ETQ.ID_FILIAL = #{idFilial}
+    </select>
+
+    <select id="listarEstoques" resultType="br.com.pulse.model.Estoque">
+        SELECT ETQ.ID AS idEstoque,
+               FIL.DESCRICAO AS filialEstoque,
+               PRD.DESCRICAO AS produtoEstoque,
+               QTD_ESTOQUE AS qtdEstoque
+        FROM ESTOQUE AS ETQ
+                 INNER JOIN FILIAL AS FIL ON ETQ.ID_FILIAL = FIL.ID
+                 INNER JOIN PRODUTO AS PRD ON ETQ.ID_PRODUTO = PRD.ID
+        GROUP BY FIL.ID, PRD.ID
+        ORDER BY FIL.ID
+    </select>
+
+    <select id="listarEstoquePorProduto" resultType="br.com.pulse.model.Estoque">
+        SELECT ETQ.ID AS idEstoque,
+               FIL.DESCRICAO AS filialEstoque,
+               PRD.DESCRICAO AS produtoEstoque,
+               QTD_ESTOQUE AS qtdEstoque
+        FROM ESTOQUE AS ETQ
+                 INNER JOIN FILIAL AS FIL ON ETQ.ID_FILIAL = FIL.ID
+                 INNER JOIN PRODUTO AS PRD ON ETQ.ID_PRODUTO = PRD.ID
+        WHERE PRD.ID = #{idProduto}
+        GROUP BY FIL.ID
+        ORDER BY FIL.ID
+    </select>
+
+    <select id="listarEstoquePorFilial" resultType="br.com.pulse.model.Estoque">
+        SELECT ETQ.ID AS idEstoque,
+               FIL.DESCRICAO AS filialEstoque,
+               PRD.DESCRICAO AS produtoEstoque,
+               QTD_ESTOQUE AS qtdEstoque
+        FROM ESTOQUE AS ETQ
+                 INNER JOIN FILIAL AS FIL ON ETQ.ID_FILIAL = FIL.ID
+                 INNER JOIN PRODUTO AS PRD ON ETQ.ID_PRODUTO = PRD.ID
+        WHERE FIL.ID = #{idFilial}
+        GROUP BY PRD.ID
+        ORDER BY PRD.ID
+    </select>
+
+</mapper>
