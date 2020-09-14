@@ -1,0 +1,31 @@
+spring:
+  profiles:
+    active: dev
+
+---
+# Coloque aqui suas configurações de Desenvolvimento
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:h2:mem:estoque;DB_CLOSE_DELAY=-1
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+---
+# Coloque aqui suas configurações de Homologação
+spring:
+  profiles: homo
+
+---
+spring:
+  profiles: deleteMe
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password

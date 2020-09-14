@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.com.pulse.mapper.FilialMapper">
+
+    <insert id="inserirFilial" parameterType="br.com.pulse.model.Filial" useGeneratedKeys="true" keyColumn="id" keyProperty="filial.idFilial" >
+        INSERT INTO filial (descricao) VALUES (#{filial.descricaoFilial})
+    </insert>
+
+    <update id="atualizarFilial" parameterType="br.com.pulse.model.Filial">
+        UPDATE filial SET descricao = #{filial.descricaoFilial} WHERE id=#{filial.idFilial}
+    </update>
+
+    <delete id="deletarFilial" parameterType="br.com.pulse.model.Filial">
+        DELETE FROM filial WHERE id=#{idFilial}
+    </delete>
+
+    <select id="listarFiliais" resultType="br.com.pulse.model.Filial">
+        SELECT id AS idFilial, descricao AS descricaoFilial FROM filial
+    </select>
+
+    <select id="buscarFilial" resultType="br.com.pulse.model.Filial">
+        SELECT id AS idFilial, descricao AS descricaoFilial FROM filial WHERE id=#{idFilial}
+    </select>
+</mapper>
